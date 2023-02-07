@@ -1,7 +1,6 @@
 import socket
 
 PORT: int = 8090
-HOST = socket.gethostname()
 
 def main():
     confirmed: bool = False
@@ -21,6 +20,7 @@ def main():
     return
 
 def runHost():
+    HOST = socket.gethostname()
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind((HOST, PORT))
     server.listen(1)
@@ -35,6 +35,15 @@ def runHost():
             connected = False
 
 def runClient():
+    HOST = input("please type the host IP Address: ")
+    confirmed = False
+    while not confirmed:
+        print(HOST)
+        select = input("Is this the correct IP Address? (Y/N): ").upper()
+        if select == "Y":
+            confirmed = True
+        elif select == "N":
+            HOST = input("please type the host IP Address: ")
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((HOST, PORT))
     connected: bool = True
