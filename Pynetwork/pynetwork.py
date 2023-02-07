@@ -23,9 +23,10 @@ def runHost():
     HOST = socket.gethostname()
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind((HOST, PORT))
+    print("Listening for Join Requests...")
     server.listen(1)
     client, address = server.accept()
-    print("Connection Established!\n\n")
+    print("\n\nConnection Established!\n\n")
     connected: bool = True
     while connected:
         try:
@@ -44,14 +45,17 @@ def runClient():
             confirmed = True
         elif select == "N":
             HOST = input("please type the host IP Address: ")
+
+    print("Waiting to Establish Connection...")
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((HOST, PORT))
-    print("Connection Established!\n\n")
+    print("\n\nConnection Established!\n\n")
     connected: bool = True
     while connected:
         try:
             data = client.recv(2048)
-            print(data.decode("UTF-8"))
+            message = data.decode("UTF-8")
+            print(f"Message from Host: {message}")
         except (BrokenPipeError, ConnectionResetError):
             connected = False
     pass
