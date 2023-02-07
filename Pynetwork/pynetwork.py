@@ -30,7 +30,7 @@ def runHost():
     while connected:
         try:
             data = input("Type something to send: ")
-            client.send(data)
+            client.send(bytes(data.encode("UTF-8")))
         except (BrokenPipeError, ConnectionResetError):
             connected = False
 
