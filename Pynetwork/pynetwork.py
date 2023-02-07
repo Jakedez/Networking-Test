@@ -46,11 +46,12 @@ def runClient():
             HOST = input("please type the host IP Address: ")
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((HOST, PORT))
+    print("Connection Established!\n\n")
     connected: bool = True
     while connected:
         try:
             data = client.recv(2048)
-            print(data.decode())
+            print(data.decode("UTF-8"))
         except (BrokenPipeError, ConnectionResetError):
             connected = False
     pass
