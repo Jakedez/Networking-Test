@@ -1,5 +1,6 @@
 import socket
 
+
 PORT: int = 8090
 
 def main():
@@ -16,6 +17,7 @@ def main():
             runClient()
         else:
             print("Please select a valid option.\n\n")
+    
         
     return
 
@@ -34,6 +36,8 @@ def runHost():
             client.send(bytes(data.encode("UTF-8")))
         except (BrokenPipeError, ConnectionResetError):
             connected = False
+    print("Client Disconnected from Host.")
+    input("Press [Enter] to Continue...")
 
 def runClient():
     HOST = input("please type the host IP Address: ")
@@ -58,7 +62,8 @@ def runClient():
             print(f"Message from Host: {message}")
         except (BrokenPipeError, ConnectionResetError):
             connected = False
-    pass
+    
+    input("Press [Enter] to Continue...")
 
 
 if __name__ == "__main__":
