@@ -63,6 +63,7 @@ def runClient():
         except (BrokenPipeError, ConnectionResetError):
             connected = False
     
+    print("Host Disconnected from Client.")
     input("Press [Enter] to Continue...")
 
 
